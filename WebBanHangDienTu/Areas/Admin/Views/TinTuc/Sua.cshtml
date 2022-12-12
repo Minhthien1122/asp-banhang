@@ -1,0 +1,137 @@
+﻿@model WebBanHangDienTu.Models.Data.BanTin
+
+@{
+    ViewBag.Title = "Cập nhập bản tin";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+@section navheader{
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="/Admin/Home" class="nav-link">Trang chủ</a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="/Admin/TinTuc" class="nav-link">Tin tức</a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="#" class="nav-link">Cập nhập</a>
+        </li>
+    </ul>
+}
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Cập nhập bản tin</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Bản tin</a></li>
+                    <li class="breadcrumb-item active">Cập nhập</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Thông tin cập nhập bản tin</h3>
+        </div>
+        <div class="card-body"> 
+            @if (Model != null)
+            {
+                <div class="bs-stepper-content">
+                    @using (Html.BeginForm("Sua", "TinTuc", FormMethod.Post, new { }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+                        @Html.HiddenFor(x => x.Id)
+                        @Html.HiddenFor(x => x.DanhMucId)
+                        @Html.HiddenFor(x => x.NgayTao)
+                        <!-- your steps content here -->
+                    <div id="logins-part" class="content active dstepper-block" role="tabpanel" aria-labelledby="logins-part-trigger">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Tiêu đề</label>
+                            @Html.TextBoxFor(x => x.TieuDe, new { @class = "form-control", @placeholder = "Tên tiêu đề" })
+                            @Html.ValidationMessageFor(x => x.TieuDe, null, new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputFile">Ảnh đại diện</label>
+                            <div class="row p-2">
+                                @Html.TextBoxFor(x => x.HinhAnh, new { @class = "form-control col-md-6", type = "text" })
+
+                                <a href="#" onclick="BrowseServer()" class="btn btn-dark" name="HinhAnh">Chọn ảnh</a>
+                                @*@Html.ValidationMessageFor(x => x.HinhAnh, "", new { @class = "text-danger" })*@
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Mô tả</label>
+                            @Html.TextAreaFor(x => x.MoTa, new { @class = "form-control" })
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Chi tiết</label>
+                            @Html.TextAreaFor(x => x.MoTaChiTiet, new { @class = "form-control", @id = "txtChiTiet" })
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Hiển thị</label>
+                            @Html.CheckBoxFor(x => x.IsActive)
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Tiêu đề SEO</label>
+                            @Html.TextAreaFor(x => x.TieuDeSEO, new { @class = "form-control" })
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Mô tả SEO</label>
+                            @Html.TextAreaFor(x => x.MoTaSEO, new { @class = "form-control" })
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Từ khóa SEO</label>
+                            @Html.TextAreaFor(x => x.TuKhoaSEO, new { @class = "form-control" })
+                        </div>
+                    </div>
+                        <div>
+                            <a href="/Admin/TinTuc" class="btn btn-danger">Quay lại</a>
+                            <button type="submit" class="btn btn-primary">Sửa</button>
+                        </div>
+                    }
+                </div>
+
+            }
+        </div>
+        <!-- /.card-body -->
+        <div class="card-footer">
+
+        </div>
+        <!-- /.card-footer-->
+    </div>
+    <!-- /.card -->
+
+</section>
+<!-- /.content -->
+@section scripts{
+    <script>
+        $(document).ready(function (){
+            CKEDITOR.replace('txtChiTiet', {
+                customConfig: '~/Content/ckeditor/config.js',
+                extraAllowedContent: 'span',
+            });
+        });
+        function BrowseServer() {
+            var finder = new CKFinder();
+            finder.selectActionFunction = GanUrlHinhAnh;
+            finder.popup();
+        }
+        function GanUrlHinhAnh(Url) {
+            $("input[name=HinhAnh]").val(Url);
+        }
+    </script>
+}

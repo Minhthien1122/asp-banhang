@@ -1,0 +1,97 @@
+﻿@model WebBanHangDienTu.Models.DangKyModel
+@{
+    ViewBag.Title = "Đăng ký tài khoản";
+}
+
+<link rel="stylesheet" type="text/css" href="~/Content/Assets/styles/main_styles.css">
+
+<div class="container" style="margin-top:165px;">
+    <hr />
+    <div class="row">
+        <div class="col-md-12">
+            <h2>@ViewBag.Title.</h2>
+
+            @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                <hr />
+                @Html.ValidationSummary("", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(m => m.UserName, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(s => s.UserName)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(s => s.Email)
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(s => s.Password)
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(s => s.ConfirmPassword)
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Phone, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.Phone, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(s => s.Phone)
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.NgaySinh, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.NgaySinh, new { @class = "form-control", @type = "date" })
+                        @Html.ValidationMessageFor(s => s.NgaySinh)
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Address, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.Address, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(s => s.Address)
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.City, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.City, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(s => s.City)
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" class="btn btn-success" value="Đăng ký" />
+                    </div>
+                    <p class="p-3">Bạn đã có tài khoản ? <a href="/Account/Login" style="color:blue;">Đăng nhập</a></p>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,372 @@
+﻿@model PagedList.PagedList<WebBanHangDienTu.Models.Data.SanPham>
+@using PagedList.Mvc
+@using PagedList
+@{
+    ViewBag.Title = "Danh sách sản phẩm";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+@section navheader{
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="/Admin/Home" class="nav-link">Trang chủ</a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="/Admin/SanPham" class="nav-link">@ViewBag.Title</a>
+        </li>
+    </ul>
+}
+@*//CSS dialog*@
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Quản lý sản phẩm</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+                    <li class="breadcrumb-item active">@ViewBag.Title</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">@ViewBag.Title</h3>
+
+            <div class="card-tools">
+                <a href="/Admin/SanPham/Them" class="btn btn-primary">Thêm mới</a>
+                <a href="#" class="btn btn-danger" id="btnXoaAll">Xóa</a>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-6">
+                    @using (Html.BeginForm("Index", "SanPham", FormMethod.Get, new { }))
+                    {
+                        <div class="input-group input-group-sm">
+                            @Html.TextBox("Searchtext", "", new { @placeHolder = "Tìm kiếm...", @class = "form-control" })
+                            <span class="input-group-append">
+                                <button type="submit" class="btn btn-info btn-flat">
+                                    Tìm kiếm
+                                </button>
+                            </span>
+                        </div>
+                    }
+                </div>
+            </div>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th><input type="checkbox" id="SelectAll" /></th>
+                        <th>STT</th>
+                        <th>Hinh ảnh</th>
+                        <th>Tên sản phẩm</th>
+                        <th>Danh mục</th>
+                        <th>Thương hiệu</th>
+                        <th>Số lượng</th>
+                        <th>Giá gốc</th>
+                        <th>Giá</th>
+                        <th>Ngày tạo</th>
+                        @*<th>Home</th>*@
+                        <th>Hot</th>
+                        <th>Sale</th>
+                        <th>Feature</th>
+                        <th>Hiển thị</th>
+
+                        <th style="width:150px"></th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @if (Model != null && Model.Any())
+                    {
+                        var i = ((ViewBag.Page - 1) * ViewBag.PageSize) + 1;
+                        foreach (var item in Model)
+                        {
+                            var strCheck = item.IsActive ? "<i class='fa fa-check text-success'></i>" : "<i class='fas fa-times text-danger'></i>";
+                            //var strCheckHome = item.IsHome ? "<i class='fa fa-check text-success'></i>" : "<i class='fas fa-times text-danger'></i>";
+                            var strCheckHot = item.IsHot ? "<i class='fa fa-check text-success'></i>" : "<i class='fas fa-times text-danger'></i>";
+                            var strCheckSale = item.IsSale ? "<i class='fa fa-check text-success'></i>" : "<i class='fas fa-times text-danger'></i>";
+                            var strCheckFeature = item.IsFeature ? "<i class='fa fa-check text-success'></i>" : "<i class='fas fa-times text-danger'></i>";
+                            <tr id="trow_@item.Id">
+                                <td><input type="checkbox" class="cbkItem" value="@item.Id" /></td>
+                                <td>@i</td>
+                                <td><img class="HinhSP" data-id="@item.Id" src="@item.HinhAnhSP.FirstOrDefault(x=>x.IsDefault).HinhAnh" width="50" /></td>
+                                <td>@item.TenSP</td>
+                                <td>
+                                    @item.DanhMucSP.TenDanhMuc
+                                </td>
+                                <td>
+                                    @item.ThuongHieu.TenTH
+                                </td>
+                                <td>@item.SoLuong</td>
+                                <td>@item.GiaNhap</td>
+                                <td>@item.DonGia</td>
+                                <td>@item.NgayTao.ToString("dd/MM/yyyy")</td>
+                                @*<td class="text-center">
+            <a href="#" data-id="@item.Id" class="btnHome"> @Html.Raw(strCheckHome)</a>
+        </td>*@
+                                <td class="text-center">
+                                    <a href="#" data-id="@item.Id" class="btnHot"> @Html.Raw(strCheckHot)</a>
+                                </td>
+                                <td class="text-center">
+                                    <a href="#" data-id="@item.Id" class="btnSale"> @Html.Raw(strCheckSale)</a>
+                                </td>
+                                <td class="text-center">
+                                    <a href="#" data-id="@item.Id" class="btnFeature"> @Html.Raw(strCheckFeature)</a>
+                                </td>
+                                <td class="text-center">
+                                    <a href="#" data-id="@item.Id" class="btnActive"> @Html.Raw(strCheck)</a>
+                                </td>
+                                <td>
+                                    <a href="/Admin/SanPham/Sua/@item.Id" class="btn btn-sm btn-primary">Sửa</a>
+                                    <a href="#" data-id="@item.Id" class="btn btn-sm btn-danger btnDelete">Xóa</a>
+                                </td>
+                            </tr>
+                            i++;
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="4">Không có bản ghi nào!!!</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div class="row">
+                <div class="col-6"></div>
+                <div class="col-6" style="text-align:right;">
+                    @Html.PagedListPager(Model, page => Url.Action("index", new { page, @Searchtext = ViewBag.Searchtext }))
+                </div>
+            </div>
+        </div>
+        <!-- /.card-body -->
+        <div class="card-footer">
+
+        </div>
+        <!-- /.card-footer-->
+    </div>
+    <!-- /.card -->
+
+</section>
+<div id="dialog">
+    <iframe id="myIframe" style="border: 0; width:100%; height: 100%;"></iframe>
+</div>
+<!-- /.content -->
+@section scripts{
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            //hiển thị form uplpad
+            $("#dialog").dialog({
+                autoOpen: false,
+                show: "fade",
+                hide: "fade",
+                modal: true,
+                height: '600',
+                width: '700',
+                resizable: true,
+                title: 'Quản lý ảnh sản phẩm',
+                close: function () {
+                    window.location.reload();
+                }
+            });
+            $('body').on("click", ".HinhSP", function () {
+                var proid = $(this).attr("data-id");
+                $("#dialog #myIframe").attr("src", "/Admin/HinhAnhSP/Index?id=" + proid);
+                $('#dialog').dialog('open');
+                return false;
+            });
+
+            $('body').on('click', '#btnXoaAll', function (e) {
+                e.preventDefault();
+                var str = "";
+                var checkbox = $(this).parents('.card').find('tr td input:checkbox');
+                var i = 0;
+                checkbox.each(function () {
+                    if (this.checked) {
+                        var _id = $(this).val();
+                        if (i === 0) {
+                            str += _id;
+                        } else {
+                            str += "," + _id;
+                        }
+                        i++;
+                    } else {
+                        checkbox.attr('selected', '');
+                    }
+                });
+                if (str.length > 0) {
+                    var conf = confirm('Bạn có muốn xóa các bản ghi này hay không?');
+                    if (conf === true) {
+                        $.ajax({
+                            url: '/Admin/SanPham/XoaAll',
+                            type: 'POST',
+                            data: { ids: str },
+                            success: function (rs) {
+                                if (rs.success) {
+                                    location.reload();
+                                }
+                            }
+                        });
+                    }
+                }
+            });
+            $('body').on('change', '#SelectAll', function () {
+                var checkStatus = this.checked;
+                var checkbox = $(this).parents('.card-body').find('tr td input:checkbox');
+                checkbox.each(function () {
+                    this.checked = checkStatus;
+                    if (this.checked) {
+                        checkbox.attr('selected', 'checked');
+                    } else {
+                        checkbox.attr('selected', '');
+                    }
+                });
+            });
+            $('body').on('click', '.btnDelete', function () {
+                var id = $(this).data("id");
+                var conf = confirm('Bạn có muốn xóa bản ghi này hay không?');
+                if (conf === true) {
+                    $.ajax({
+                        url: '/Admin/SanPham/Xoa',
+                        type: 'POST',
+                        data: { id: id },
+                        success: function (rs) {
+                            if (rs.success) {
+                                $('#trow_' + id).remove();
+                            }
+                        }
+                    });
+                }
+            });
+            //$('body').on('click', '.btnHome', function (e) {
+            //    e.preventDefault();
+            //    var btn = $(this);
+            //    var id = btn.data("id");
+            //    $.ajax({
+            //        url: '/Admin/SanPham/IsHome',
+            //        type: 'POST',
+            //        data: { id: id },
+            //        success: function (rs) {
+            //            if (rs.success) {
+            //                if (rs.IsHome) {
+            //                    btn.html("<i class='fa fa-check text-success'></i>");
+            //                }
+            //                else {
+            //                    btn.html("<i class='fas fa-times text-danger'></i>");
+
+            //                }
+            //            }
+
+            //        }
+            //    });
+            //});
+            $('body').on('click', '.btnHot', function (e) {
+                e.preventDefault();
+                var btn = $(this);
+                var id = btn.data("id");
+                $.ajax({
+                    url: '/Admin/SanPham/IsHot',
+                    type: 'POST',
+                    data: { id: id },
+                    success: function (rs) {
+                        if (rs.success) {
+                            if (rs.IsHot) {
+                                btn.html("<i class='fa fa-check text-success'></i>");
+                            }
+                            else {
+                                btn.html("<i class='fas fa-times text-danger'></i>");
+
+                            }
+                        }
+
+                    }
+                });
+            });
+            $('body').on('click', '.btnSale', function (e) {
+                e.preventDefault();
+                var btn = $(this);
+                var id = btn.data("id");
+                $.ajax({
+                    url: '/Admin/SanPham/IsSale',
+                    type: 'POST',
+                    data: { id: id },
+                    success: function (rs) {
+                        if (rs.success) {
+                            if (rs.IsSale) {
+                                btn.html("<i class='fa fa-check text-success'></i>");
+                            }
+                            else {
+                                btn.html("<i class='fas fa-times text-danger'></i>");
+
+                            }
+                        }
+
+                    }
+                });
+            });
+            $('body').on('click', '.btnFeature', function (e) {
+                e.preventDefault();
+                var btn = $(this);
+                var id = btn.data("id");
+                $.ajax({
+                    url: '/Admin/SanPham/IsFeature',
+                    type: 'POST',
+                    data: { id: id },
+                    success: function (rs) {
+                        if (rs.success) {
+                            if (rs.IsFeature) {
+                                btn.html("<i class='fa fa-check text-success'></i>");
+                            }
+                            else {
+                                btn.html("<i class='fas fa-times text-danger'></i>");
+
+                            }
+                        }
+
+                    }
+                });
+            });
+            $('body').on('click', '.btnActive', function (e) {
+                e.preventDefault();
+                var btn = $(this);
+                var id = btn.data("id");
+                $.ajax({
+                    url: '/Admin/SanPham/IsActive',
+                    type: 'POST',
+                    data: { id: id },
+                    success: function (rs) {
+                        if (rs.success) {
+                            if (rs.IsActive) {
+                                btn.html("<i class='fa fa-check text-success'></i>");
+                            }
+                            else {
+                                btn.html("<i class='fas fa-times text-danger'></i>");
+
+                            }
+                        }
+
+                    }
+                });
+            });
+        });
+    </script>
+}
+
+

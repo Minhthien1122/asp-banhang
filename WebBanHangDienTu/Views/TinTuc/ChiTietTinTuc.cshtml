@@ -1,0 +1,55 @@
+﻿@model WebBanHangDienTu.Models.Data.BanTin
+
+@{
+    ViewBag.Title = "Tin tức";
+}
+<link rel="stylesheet" type="text/css" href="~/Content/Assets/styles/contact_styles.css">
+<link rel="stylesheet" type="text/css" href="~/Content/Assets/styles/contact_responsive.css">
+@if (Model != null)
+{
+    <div class="super_container">
+        <div class="container contact_container">
+            <div class="row">
+                <div class="col">
+
+                    <!-- Breadcrumbs -->
+
+                    <div class="breadcrumbs d-flex flex-row align-items-center">
+                        <ul>
+                            <li><a href="/">Trang chủ</a></li>
+                            <li><a href="/Tin-tuc"> <i class="fa fa-angle-right" aria-hidden="true"></i>@Model.DanhMuc.TenDanhMuc</a></li>
+                            <li class="active"><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>@Model.TieuDe</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+
+                <h2 class="text-center">@Model.TieuDe</h2>
+                <div class="text-center pb-3"> @Model.MoTa </div>
+                <div class="m-3">
+                    @*<img src="@Model.HinhAnh" alt="@Model.TieuDe" style="width:1111px; height:700px;">*@
+                </div>
+                <div class="row"> @Html.Raw(Model.MoTaChiTiet)</div>
+            </div>
+        </div>
+    </div>
+
+}
+<link rel="stylesheet" type="text/css" href="~/Content/Assets/styles/main_styles.css">
+
+<div class="blogs">
+    <div class="container">
+        <div class="row">
+            <div class="col text-center">
+                <div class="section_title">
+                    <h2>Tin tức mới nhất</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row blogs_container">
+            @Html.Action("Partial_TinTuc_Home", "TinTuc")
+
+        </div>
+    </div>
+</div>

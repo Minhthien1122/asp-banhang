@@ -1,0 +1,38 @@
+﻿@model IEnumerable<WebBanHangDienTu.Models.Data.SanPham>
+
+@if (Model != null && Model.Any())
+{
+    foreach (var item in Model)
+    {
+        var strHinhAnh = "";
+        var img = item.HinhAnhSP.FirstOrDefault(x => x.IsDefault);
+        if (img != null)
+        {
+            strHinhAnh = img.HinhAnh;
+        }
+        <div class="product-item @item.ThuongHieu.BiDanh">
+            <div class="product discount product_filter">
+                <div class="product_image">
+                    <img src="@strHinhAnh" alt="@item.TenSP">
+                </div>
+                <div class="favorite favorite_left"></div>
+                @if (item.GiaGiam > 0)
+                {
+                    <div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>sale</span></div>
+                }
+                <div class="product_info">
+                    <h6 class="product_name"><a href="/chi-tiet/@item.BiDanh-@item.Id">@item.MoTa</a></h6>
+                    @if (@item.GiaGiam > 0)
+                    {
+                        <div class="product_price">@WebBanHangDienTu.Common.Common.FormatNumber(item.GiaGiam, 0)<span>@WebBanHangDienTu.Common.Common.FormatNumber(item.DonGia, 0)</span></div>
+                    }
+                    else
+                    {
+                        <div class="product_price">@WebBanHangDienTu.Common.Common.FormatNumber(item.DonGia, 0)</div>
+                    }
+                </div>
+            </div>
+            <div class="red_button add_to_cart_button"><a href="#" class="btnAddToCart" data-id="@item.Id">Thêm vào giỏ</a></div>
+        </div>
+    }
+}

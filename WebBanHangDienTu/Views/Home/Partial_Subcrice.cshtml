@@ -1,0 +1,49 @@
+﻿@model WebBanHangDienTu.Models.Data.DangKies
+@*<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>*@
+
+<div class="newsletter">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="newsletter_text d-flex flex-column justify-content-center align-items-lg-start align-items-md-center ">
+                    <h4>Khuyến mãi hấp dẫn khi đăng ký theo dõi</h4>
+                    <p class="">Khi đăng kí sẽ nhận được thông báo tin mới nhất cùng với voucher 10% cho đơn hàng đầu tiên</p>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                @using (Ajax.BeginForm("Subscrice", "Home", new AjaxOptions
+                {
+                    OnBegin = "OnBeginSub",
+                    OnSuccess = "OnSuccessSub",
+                    OnFailure = "OnFailureSub"
+                }))
+                {
+                    @Html.AntiForgeryToken()
+                    <script>
+                        function OnBeginSub() {
+
+                        }
+                        function OnSuccessSub(rs) {
+                            if (rs == true) {
+                                alert("Bạn đã đăng ký thành công");
+                            }
+                        }
+                        function OnFailureSub(rs) {
+
+                        }
+                    </script>
+                    <div class="newsletter_form d-flex flex-md-row flex-column flex-xs-column align-items-center justify-content-lg-end justify-content-center">
+                        @*@Html.TextBoxFor(x=>x.Email, new {@placeHolder="Email của bạn", @type = "email", @required = "required" })*@
+                        <input id="newsletter_email" name="Email" type="email" placeholder="Email của bạn" required="required" data-error="Valid email is required.">
+                        <button id="newsletter_submit" type="submit" class="newsletter_submit_btn trans_300" value="Submit">subscribe</button>
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

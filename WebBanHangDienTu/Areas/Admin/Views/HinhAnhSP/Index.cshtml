@@ -1,0 +1,148 @@
+﻿@model IEnumerable<WebBanHangDienTu.Models.Data.HinhAnhSP>
+@{
+    ViewBag.Title = "Ảnh sản phẩm";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutEmpty.cshtml";
+}
+
+<style>
+    .glImage{
+        position:center;
+        top : 0;
+        left: 0;
+        margin: 0;
+        padding: 0;
+        display: inline-block;
+    }
+    .glImage li {
+        display: inline-block;
+        /*position:relative*/
+    }
+    .box-btn{
+        /*position: absolute;*/
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        text-align: center;
+    }
+</style>
+<!-- Main content -->
+<section class="content">
+
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Ảnh sản phẩm</h3>
+
+            <div class="card-tools">
+                @*<button type="button" class="btn btn-danger" id="btnDeleteALL" title="Collapse">
+                    Xóa hết
+                </button>*@
+                <input type="button" value="Tải ảnh"  class="btn btn-success" onclick="BrowseServer('txtHinhAnh')"/>
+            </div>
+        </div>
+        <div class="card-body">
+            <ul class="glImage">
+               @if (Model != null)
+               {
+                   foreach(var item in Model)
+                   {
+                       var strCheck = item.IsDefault ? "<i class='fa fa-check text-success'></i>" : "<i class='fas fa-times text-danger'></i>";
+                        <li id="trow_@item.Id">
+                            <img src="@item.HinhAnh" width="170" />
+                            <div class="box-btn">
+                                <a href="#" data-id="@item.Id" style="color:red;" class="btn btn-sm btnDelete"><i class="fa fa-trash"></i> </a>
+                               
+                                @if (item.IsDefault)
+                                {
+                                    <a href="#" data-id="@item.Id" class="btn btn-sm btnDefault">@Html.Raw(strCheck)</a>
+                                }
+                                else
+                                {
+                                    <a href="#" data-id="@item.Id" class="btn btn-sm btnDefault">@Html.Raw(strCheck)</a>
+
+                                }
+                                
+                                
+
+                            </div>
+                        </li>
+                   }
+               }
+            </ul>
+        </div>
+        <!-- /.card-body -->
+        
+        <!-- /.card-footer-->
+    </div>
+    <!-- /.card -->
+
+</section>
+<!-- /.content -->
+<script>
+    function BrowseServer() {
+        var finder = new CKFinder();
+        finder.selectActionFunction = GanUrlHinhAnh;
+        finder.popup();
+    }
+    function GanUrlHinhAnh(Url) {
+        ThemHinhAnh(@ViewBag.SanPhamId, Url);
+    }
+
+    function ThemHinhAnh(id, url) {
+        $.ajax({
+            url: '/Admin/HinhAnhSP/ThemHinh',
+            type: 'POST',
+            data: { SanPhamId: id, url: url },
+            success: function (rs) {
+                if (rs.success) {
+                    window.location.reload();
+                }
+            }
+        });
+    }
+
+    $(document).ready(function () {
+        $('body').on('click', '.btnDelete', function () {
+            var id = $(this).data('id');
+            var conf = confirm('Bạn có muốn xóa ảnh này không?');
+            if (conf === true) {
+                $.ajax({
+                    url: '/Admin/HinhAnhSP/Xoa',
+                    type: 'POST',
+                    data: { id: id },
+                    success: function (rs) {
+                        if (rs.success) {
+                            $('#trow_' + id).remove();
+                        }
+                    }
+                });
+            }
+        });
+       
+        $('body').on('click', '.btnDefault', function (e) {
+            e.preventDefault();
+            var btn = $(this);
+            var id = btn.data("id");
+            $.ajax({
+                url: '/Admin/HinhAnhSP/IsDefault',
+                type: 'POST',
+                data: { id: id },
+                success: function (rs) {
+                    if (rs.success) {
+                        if (rs.IsDefault) {
+                            btn.html("<i class='fa fa-check text-success'></i>");
+                            
+                        }
+                        else {
+                            btn.html("<i class='fas fa-times text-danger'></i>");
+
+                        }
+                    }
+
+                }
+            });
+        });
+      
+    });
+
+</script>

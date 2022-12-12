@@ -1,0 +1,31 @@
+﻿@model IEnumerable<WebBanHangDienTu.Models.Data.ChiTietDonHang>
+@if (Model != null && Model.Any())
+{
+    int i = 1;
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>STT</th>
+                <th>Tên sản phẩm</th>
+                <th>Giá</th>
+                <th>Số lượng</th>
+                <th>Thành tiền</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@i</td>
+                    <td>@item.SanPham.TenSP</td>
+                    <td>@WebBanHangDienTu.Common.Common.FormatNumber((item.DonGia), 0) đ</td>
+                    <td>@item.SoLuong</td>
+                    <td>@WebBanHangDienTu.Common.Common.FormatNumber((item.DonGia * item.SoLuong), 0) đ</td>
+                </tr>
+                i++;
+            }
+
+        </tbody>
+        
+    </table>
+}

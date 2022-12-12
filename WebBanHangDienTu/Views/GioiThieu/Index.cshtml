@@ -1,0 +1,45 @@
+﻿@model IEnumerable<WebBanHangDienTu.Models.Data.BaiViet>
+
+
+
+@{
+    ViewBag.Title = "Giới thiệu";
+}
+<link rel="stylesheet" type="text/css" href="~/Content/Assets/styles/contact_styles.css">
+<link rel="stylesheet" type="text/css" href="~/Content/Assets/styles/contact_responsive.css">
+<div class="super_container" >
+    <div class="container contact_container">
+            <div class="row">
+                <div class="col">
+
+                    <!-- Breadcrumbs -->
+
+                    <div class="breadcrumbs d-flex flex-row align-items-center">
+                        <ul>
+                            <li><a href="/">Trang chủ</a></li>
+                            <li class="active"><a href="/GioiThieu"><i class="fa fa-angle-right" aria-hidden="true"></i>Giới thiệu</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                @if (Model != null)
+                {
+                    foreach (var item in Model)
+                    {
+
+                        <h2 class="text-center">@item.TieuDe</h2>
+                        <div class="text-center pb-3"> @item.MoTa </div>
+                        <div>
+                            <img src="@item.HinhAnh" alt="@item.TieuDe" style="width:1111px;">
+                        </div>
+                        <div > @Html.Raw(item.MoTaChiTiet)</div>
+                    }
+                }
+
+            </div>
+        </div>
+
+
+</div>
+

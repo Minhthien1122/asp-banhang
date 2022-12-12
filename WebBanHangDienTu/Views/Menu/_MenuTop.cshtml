@@ -1,0 +1,18 @@
+﻿@model IEnumerable<WebBanHangDienTu.Models.Data.DanhMuc>
+
+@if (Model != null && Model.Any())
+{
+    <ul class="navbar_menu">
+        @foreach (var item in Model)
+        {
+            if (item.BiDanh.Equals("trang-chu"))
+            {
+                item.BiDanh = "";
+            }
+            <li class="">
+                <a class="nav-link" href="/@item.BiDanh">@item.TenDanhMuc</a>
+            </li>
+
+        }
+    </ul>
+ }

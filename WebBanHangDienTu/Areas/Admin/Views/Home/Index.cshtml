@@ -1,0 +1,194 @@
+﻿
+@{
+    ViewBag.Title = "Trang chủ ADmin";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section navheader{
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="/Admin/Home" class="nav-link">Trang chủ</a>
+        </li>
+
+    </ul>
+}
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Quản trị</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+                    <li class="breadcrumb-item active">Quản trị</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+        <!-- Small boxes (Stat box) -->
+        <div class="row">
+            <div class="col-lg-3 col-6">
+                <!-- small box -->
+                <div class="small-box bg-info">
+                    <div class="inner">
+                        <h3> @ViewBag.TongDonHang</h3>
+
+                        <p>Đơn hàng</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ti-shopping-cart-full"></i>
+                    </div>
+                    <a href="/admin/GioHang" class="small-box-footer">Xem thêm <i class="fas fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-6">
+                <!-- small box -->
+                <div class="small-box bg-success">
+                    <div class="inner">
+                        <h3>@WebBanHangDienTu.Common.Common.FormatNumber(@ViewBag.TongDoanhThu, 0)<sup style="font-size: 20px">đ</sup></h3>
+
+                        <p>Doanh thu</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ti-stats-up"></i>
+                    </div>
+                    <a href="#" class="small-box-footer">Xem thêm <i class="fas fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-6">
+                <!-- small box -->
+                <div class="small-box bg-warning">
+                    <div class="inner">
+                        <h3>@ViewBag.TongThanhVien</h3>
+
+                        <p>Người đăng ký</p>
+                    </div>
+                    <div class="icon">
+                        <i class="icon ti-user"></i>
+                    </div>
+                    <a href="/admin/users" class="small-box-footer">Xem thêm <i class="fas fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-6">
+                <!-- small box -->
+                <div class="small-box bg-danger">
+                    <div class="inner">
+                        <h3>@Html.Action("Refresh", "home")</h3>
+
+                        <p>Lượt truy cập</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ti-pie-chart"></i>
+                    </div>
+                    <a href="#visits" class="small-box-footer">Xem thêm <i class="fas fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+            <!-- ./col -->
+        </div>
+        <!-- /.row -->
+        <!-- Main row -->
+        
+    </div><!-- /.container-fluid -->
+</section>
+
+
+@section scripts{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js" integrity="sha512-ElRFoEQdI5Ht6kZvyzXhYG9NqjtkmlkfYk0wr6wHxU9JEHakS7UJZNeml5ALk+8IKlU6jDgMabC3vkumRokgJA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script type="text/javascript">
+        $(function () {
+            LoadData();
+            $("#type").bind("change", function () {
+                LoadData();
+            });
+            $("#fromDate").bind("change", function () {
+                LoadData();
+            });
+            $("#fromTo").bind("change", function () {
+                LoadData();
+            });
+        });
+
+        function LoadData() {
+            var chartType = parseInt($("#rblChartType input:checked").val());
+
+        }
+
+        @*$(document).ready(function () {
+
+            $("#Submit").click(function (fromDate, fromTo, type) {
+                fromDate = $("#formDate").val();
+                fromTo = $("#formTo").val();
+                type = $("#type").val();
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("ThongKeSanPhanTheoType", "Home")',
+                data: { type: type, fromDate: fromDate, formTo: fromTo },
+                dataType: "json",
+                traditional: true,
+                success: function (data) {
+                    var barchart = document.getElementById('bar').getContext('2d');
+                    new Chart(barchart, {
+                        type: 'bar',
+                        data: {
+                            labels: data.data.map(a => a[0]),
+                            datasets: [{
+                                label: 'Bar Chart',
+                                data: data.data.map(a => a[1]),
+                                fill: false,
+                                borderColor: 'red'
+                            }]
+                        },
+                        options: {
+                            scales: {yAxes: [{ ticks: { beginAtZero: true } }]}
+                        }
+                    });
+                }
+            });
+        });
+    });*@
+
+        //var barchart = document.getElementById('bar').getContext('2d');
+        //var mybarchart = new Chart(barchart, {
+        //    type: 'bar',
+        //    data: {
+        //        labels: ['SoLuong', '3', '003'],
+        //        datasets: [{
+        //            label: 'Bar Chart',
+        //            backgroundColor: 'rgba(2,128,249)',
+        //            data: [100, 200, 300],
+        //        }]
+        //    },
+
+        //})
+
+        //var piechart = document.getElementById('pie').getContext('2d');
+        //var mypiechart = new Chart(piechart, {
+        //    type: 'pie',
+        //    data: {
+        //        labels: ['001', '002', '003'],
+        //        datasets: [{
+        //            label: 'Bie Chart',
+        //            data: [100, 200, 300],
+        //            backgroundColor: ['red', 'green', 'blue']
+        //        }]
+        //    },
+
+        //})
+
+
+    </script>
+}

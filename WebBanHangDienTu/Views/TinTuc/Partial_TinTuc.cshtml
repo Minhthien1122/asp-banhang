@@ -1,0 +1,19 @@
+﻿@model IEnumerable<WebBanHangDienTu.Models.Data.BanTin>
+@if (Model != null && Model.Any())
+{
+    foreach (var item in Model)
+    {
+        <div class="col-lg-4 blog_item_col">
+            <div class="blog_item">
+                <div class="blog_background" style="background-image:url(@item.HinhAnh)"></div>
+                <div class="blog_content d-flex flex-column align-items-center justify-content-center text-center">
+                    <h4 class="blog_title">@item.TieuDe</h4>
+                    <span class="blog_meta"> by @item.NguoiTao | @item.NgayTao.ToString("MMM dd,yyyy")</span>
+                    <a class="blog_more" href="/tin-tuc/@item.BiDanh-@item.Id">Read more</a>
+                </div>
+            </div>
+        </div>
+
+    }
+
+}

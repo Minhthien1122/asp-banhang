@@ -1,0 +1,57 @@
+﻿
+
+@{
+    ViewBag.Title = "Thanh Toán Thất bại";
+}
+
+<style>
+    .error {
+        color: red;
+    }
+</style>
+
+<link rel="stylesheet" type="text/css" href="~/Content/Assets/styles/categories_styles.css">
+<link rel="stylesheet" type="text/css" href="~/Content/Assets/styles/categories_responsive.css">
+
+
+<div class="container product_section_container">
+    <div class="row">
+        <div class="col product_section clearfix">
+
+            <!-- Breadcrumbs -->
+
+            <div class="breadcrumbs d-flex flex-row align-items-center">
+                <ul>
+                    <li><a href="/">Trang chủ</a></li>
+                    <li class="active"><a href="/thanh-toan"><i class="fa fa-angle-right" aria-hidden="true"></i>Giỏ hàng</a></li>
+                </ul>
+            </div>
+
+            <!-- Sidebar -->
+            <!-- Main Content -->
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <h1 class="">Thanh toán</h1>
+                    <p>Bạn hãy kiểm tra lại thông tin đơn hàng thật kỹ nhé!!!</p>
+                </div>
+
+            </div>
+            <hr />
+            @if (ViewBag.checkGioHang != null)
+            {
+
+               <h2>@ViewBag.checkGioHang <span style="color:crimson;"> Không tồn tại, bạn vui lòng chọn lại!!</span></h2>
+            }
+           
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/Content/Assets/js/categories_custom.js"></script>
+    
+
+}
+
+
+

@@ -1,0 +1,111 @@
+﻿  <!-- Sidebar -->
+<div class="sidebar">
+
+    <!-- Brand Logo -->
+    <a href="/Admin/home" class="brand-link">
+        <img src="~/Content/Clients/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+        <span class="brand-text font-weight-light">Quản trị hệ thống</span>
+    </a>
+    <!-- Sidebar user (optional) -->
+    <div class="user-panel mt-3 pl-3">
+        <div class="pb-3">
+            <img src="~/Content/Clients/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+            <a href="#" class="pl-2">
+                @User.Identity.Name
+            </a>
+        </div>
+
+    </div>
+
+    <!-- Sidebar Menu -->
+    <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+
+            <li class="nav-item">
+                <a href="/Admin/DanhMuc" class="nav-link">
+                    <i class="nav-icon fas fa-tachometer-alt"></i>
+                    <p>
+                        Danh mục
+                    </p>
+                </a>
+
+            </li>
+
+            <li class="nav-item">
+                <a href="/Admin/TinTuc" class="nav-link">
+                    <i class="nav-icon fas fa-th"></i>
+                    <p>
+                        Tin tức
+                    </p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="/Admin/BaiViet" class="nav-link">
+                    <i class="nav-icon fas fa-th"></i>
+                    <p>
+                        Bài viết
+                    </p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="/Admin/GioHang" class="nav-link">
+                    <i class="nav-icon fas fa-th"></i>
+                    <p>
+                        Quản lý đơn hàng
+                    </p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="/Admin/ThuongHieu" class="nav-link">
+                    <i class="nav-icon fas fa-th"></i>
+                    <p>
+                        Quản lý thương hiệu
+                    </p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <i class="nav-icon fas fa-tachometer-alt"></i>
+                    <p>
+                        Quản lý sản phẩm
+                        <i class="right fas fa-angle-left"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/Admin/DanhMucSanPham" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Danh mục sản phẩm</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/Admin/SanPham" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Sản phẩm</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a href="/Admin/Users" class="nav-link">
+                    <i class="nav-icon fas fa-th"></i>
+                    <p>
+                        Quản lý User
+                    </p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="/Account/Logout" class="nav-link">
+                    <i class="nav-icon fas fa-tachometer-alt"></i>
+                    <p>
+                        Đăng xuất
+                    </p>
+                </a>
+            </li>
+
+        </ul>
+    </nav>
+    <!-- /.sidebar-menu -->
+</div>
+<!-- /.sidebar -->
+

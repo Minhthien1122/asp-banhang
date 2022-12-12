@@ -1,0 +1,204 @@
+﻿@using WebBanHangDienTu.Common
+
+@{
+    ViewBag.Title = "Home Page";
+}
+<!-- Slider -->
+<link rel="stylesheet" type="text/css" href="~/Content/Assets/styles/main_styles.css">
+
+<div class="main_slider" style="background-image: url(/Content/Assets/images/slise.jpg); background-color: rgb(255, 0, 220, 0.1)">
+    <div class="container fill_height">
+        <div class="row align-items-center fill_height">
+            <div class="col">
+                <div class="main_slider_content">
+                    <h6 style="background-color: rgb(0,0,0,0.5); line-height: 35px; width: 250px; color: burlywood;" class="p-2">Phone 14 / Diện thoại mới nhất </h6>
+                    <h2 style="background: rgb(0,0,0,0.5); width: 250px; color: burlywood;text-align:center; ">Giảm giá 30% cho 10 người đầu tiên.</h2>
+                    <div class="red_button shop_now_button"><a href="/san-pham">Mua ngay</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Banner -->
+@Html.Action("MenuDanhMucSP", "Menu")
+
+<!-- New Arrivals -->
+
+<div class="new_arrivals" id="SanPhams">
+    <div class="container">
+        @Html.Action("ShowALLSP", "Menu")
+
+    </div>
+</div>
+
+<!--Thương hiệu-->
+<div class="new_arrivals" id="ThuongHieus">
+    <div class="container">
+        @Html.Action("ShowThuongHieu", "Menu")
+
+    </div>
+</div>
+
+
+<!-- Best Sellers -->
+<div class="best_sellers" id="KhuyenMai">
+    <div class="container">
+        <div class="row">
+            <div class="col text-center">
+                <div class="section_title new_arrivals_title">
+                    <h2>Siêu khuyến mãi</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="product_slider_container">
+                    <div class="owl-carousel owl-theme product_slider owl-loaded owl-drag">
+                        <div class="owl-stage" style="transform: translate3d(0px, 0px, 0px); transition: all 0s ease 0s; width: 2220px;">
+                            @Html.Action("SanPhamSale", "SanPham")
+
+                        </div>
+                    </div>
+
+                    <!-- Slider Navigation -->
+                    <div class="product_slider_nav_left product_slider_nav d-flex align-items-center justify-content-center flex-column">
+                        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                    </div>
+                    <div class="product_slider_nav_right product_slider_nav d-flex align-items-center justify-content-center flex-column">
+                        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- Best hot -->
+<div class="best_sellers" id="BanChay">
+    <div class="container">
+        <div class="row">
+            <div class="col text-center">
+                <div class="section_title new_arrivals_title">
+                    <h2>Bán chạy nhất</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="product_slider_container">
+                    <div class="owl-carousel owl-theme product_slider owl-loaded owl-drag">
+                        <div class="owl-stage" style="transform: translate3d(0px, 0px, 0px); transition: all 0s ease 0s; width: 2220px; ">
+
+                            @Html.Action("SanPhamHot", "SanPham")
+                        </div>
+                    </div>
+
+                    <!-- Slider Navigation -->
+                    <div class="product_slider_nav_left product_slider_nav d-flex align-items-center justify-content-center flex-column">
+                        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                    </div>
+                    <div class="product_slider_nav_right product_slider_nav d-flex align-items-center justify-content-center flex-column">
+                        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- Best hot -->
+<div class="best_sellers" id="NoiBat">
+    <div class="container">
+        <div class="row">
+            <div class="col text-center">
+                <div class="section_title new_arrivals_title">
+                    <h2>Nổi bật</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="product_slider_container">
+                    <div class="owl-carousel owl-theme product_slider owl-loaded owl-drag">
+                        <div class="owl-stage" style="transform: translate3d(0px, 0px, 0px); transition: all 0s ease 0s; width: 2220px; ">
+
+                            @Html.Action("SanPhamNoiBat", "SanPham")
+                        </div>
+                    </div>
+
+                    <!-- Slider Navigation -->
+                    <div class="product_slider_nav_left product_slider_nav d-flex align-items-center justify-content-center flex-column">
+                        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                    </div>
+                    <div class="product_slider_nav_right product_slider_nav d-flex align-items-center justify-content-center flex-column">
+                        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- Benefit -->
+
+<div class="benefit" id="Benefit">
+    <div class="container">
+        <div class="row benefit_row">
+            <div class="col-lg-3 benefit_col">
+                <div class="benefit_item d-flex flex-row align-items-center">
+                    <div class="benefit_icon"><i class="fa fa-truck" aria-hidden="true"></i></div>
+                    <div class="benefit_content">
+                        <h6>Miễn phí vận chuyển</h6>
+                        <p>Thay dổi trong một số hình thức</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 benefit_col">
+                <div class="benefit_item d-flex flex-row align-items-center">
+                    <div class="benefit_icon"><i class="fa fa-money" aria-hidden="true"></i></div>
+                    <div class="benefit_content">
+                        <h6>Thanh toán trực tiếp</h6>
+                        <p>Nhận hàng, kiểm tra và thanh toán </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 benefit_col">
+                <div class="benefit_item d-flex flex-row align-items-center">
+                    <div class="benefit_icon"><i class="fa fa-undo" aria-hidden="true"></i></div>
+                    <div class="benefit_content">
+                        <h6>Nhận hàng trong 7 ngay</h6>
+                        <p>Miễn phí ship khi giao hàng trễ</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 benefit_col">
+                <div class="benefit_item d-flex flex-row align-items-center">
+                    <div class="benefit_icon"><i class="fa fa-clock-o" aria-hidden="true"></i></div>
+                    <div class="benefit_content">
+                        <h6>Làm việc 24/24</h6>
+                        <p>Lễ vẫn có thể mua sắm</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Blogs -->
+<div class="blogs">
+    <div class="container">
+        <div class="row">
+            <div class="col text-center">
+                <div class="section_title">
+                    <h2>Tin tức mới nhất</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row blogs_container">
+            @Html.Action("Partial_TinTuc_Home", "TinTuc")
+
+        </div>
+    </div>
+</div>

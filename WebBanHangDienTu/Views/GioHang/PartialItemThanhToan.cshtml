@@ -1,0 +1,50 @@
+﻿@model IEnumerable<WebBanHangDienTu.Models.ShopingCartItem>
+@using WebBanHangDienTu.Common
+
+
+@if (Model != null && Model.Any())
+{
+    <div class="checkout">
+        <h3>
+            Giỏ hàng
+            <span style="float: right;
+                       background-color: red;
+                       color: aliceblue; 
+                       border-radius: 500%; 
+                       width: 32px; 
+                       line-height: 1.7; 
+                       text-align: center; 
+                       font-size: 18px;" >
+                @Model.Count()
+            </span>
+        </h3>
+        
+    </div>
+    //var i = 0;
+    var tongtien = decimal.Zero;
+    <div style="border:1px solid #808080;">
+
+        <table class="table">
+            @foreach (var item in Model)
+            {
+                tongtien += item.TongGia;
+                <tr>
+                    <td>@item.TenSP</td>
+                    <td>@Common.FormatNumber(item.DonGia, 0)</td>
+
+                </tr>
+            }
+            <tr>
+                <td>Tổng tiền</td>
+                <td>@Common.FormatNumber(tongtien, 0) VND</td>
+
+            </tr>
+        </table>
+
+    </div>
+
+}
+else
+{
+}
+

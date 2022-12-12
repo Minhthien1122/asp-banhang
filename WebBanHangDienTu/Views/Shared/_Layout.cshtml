@@ -1,0 +1,186 @@
+﻿
+@using WebBanHangDienTu.Common
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Shop bán hàng điện tử</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Colo Shop Template">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="~/Content/Assets/styles/bootstrap4/bootstrap.min.css">
+    <link href="~/Content/Assets/plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="~/Content/Assets/plugins/OwlCarousel2-2.2.1/owl.carousel.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/Assets/plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/Assets/plugins/OwlCarousel2-2.2.1/animate.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/Assets/plugins/jquery-ui-1.12.1.custom/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/Assets/styles/responsive.css">
+    
+    @Scripts.Render("~/bundles/modernizr")
+    <script src="~/Content/Assets/js/jquery-3.2.1.min.js"></script>
+
+    @Scripts.Render("~/bundles/jqueryval")
+
+</head>
+<body>
+    <div class="super_container">
+
+        <!-- Header -->
+
+        <header class="header trans_300">
+
+            <!-- Top Navigation -->
+
+            <div class="top_nav">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="top_nav_left">Hotline: 0387857107</div>
+                        </div>
+                        <div class="col-md-6 text-right">
+                            <div class="top_nav_right">
+                                <ul class="top_nav_menu">
+
+                                    <!-- Currency / Language / My Account -->
+
+                                   
+                                    <li class="account">
+
+                                        @if (!User.Identity.IsAuthenticated)
+                                        {
+                                            <a href="#">
+                                                Tài khoản website
+                                                <i class="fa fa-angle-down"></i>
+                                            </a>
+                                            <ul class="account_selection">
+                                                <li><a href="/Account/Login"><i class="fa fa-sign-in" aria-hidden="true"></i>Đăng nhập</a></li>
+                                                <li><a href="/Account/Register"><i class="fa fa-user-plus" aria-hidden="true"></i>Đăng ký</a></li>
+                                            </ul>
+
+                                        }
+                                        else
+                                        {
+                                            <a href="#">
+                                               Chào mừng: @User.Identity.Name
+                                                <i class="fa fa-angle-down"></i>
+                                            </a>
+                                            <ul class="account_selection">
+                                                <li><a href="#@*/Account/Profiles*@"><i class="fa fa-sign-in" aria-hidden="true"></i>My profile</a></li>
+                                                <li><a href="/Account/Logout"><i class="fa fa-user-plus" aria-hidden="true"></i>Đăng xuất</a></li>
+                                            </ul>
+                                        }
+
+                                       
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="main_nav_container">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12 text-right">
+                            <div class="logo_container">
+                                <a href="/">Thế giới<span>điện tử</span></a>
+                            </div>
+                            <nav class="navbar">
+                                @Html.Action("MenuTop", "Menu")
+                                <ul class="navbar_user">
+                                    <li class="">
+                                        @*Tạo form tìm kiếm về action tìm kiếm*@
+                                        @using (Html.BeginForm("TimKiem", "Home", FormMethod.Get, new { }))
+                                        {
+                                            <div class="input-group input-group-sm" style="z-index:0;">
+                                                @Html.TextBox("Searchtext", "", new { @placeHolder = "Tìm kiếm...", @class = "form-control" })
+                                                <span class="input-group-append">
+                                                    <button type="submit" class="btn btn-info btn-flat" name="Searchtext">
+                                                        <i class="fa fa-search"></i>
+                                                        
+                                                    </button>
+                                                </span>
+                                            </div>
+                                        }
+                                    </li>
+                                    @*<li><a href="/Profile"><i class="fa fa-user" aria-hidden="true"></i></a></li>*@
+                                    <li class="checkout">
+                                        <a href="/gio-hang">
+                                            <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                                            <span id="checkout_items" class="checkout_items">0</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                                <div class="hamburger_container">
+                                    <i class="fa fa-bars" aria-hidden="true"></i>
+                                </div>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </header>
+
+       
+        @RenderBody()
+
+        <!-- Newsletter -->
+        @Html.Action("Partial_Subcrice", "Home")
+        <!-- Footer -->
+
+        <footer class="footer" style="background: #d2d6ef;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="footer_nav_container d-flex flex-sm-row flex-column align-items-center justify-content-lg-start justify-content-center ">
+                            <ul class="footer_nav row">
+                                <li class="col-md-3"><a href="#banner">Danh mục</a></li>
+                                <li class="col-md-3"><a href="#SanPhams">Sản Phẩm</a></liclass="col">
+                                <li class="col-md-3"><a href="#ThuongHieus">Thương hiệu</a></li>
+                                <li class="col-md-3"><a href="#KhuyenMai">Khuyến mãi</a></li>
+                                <li class="col-md-3"><a href="#BanChay">Bán chạy</a></li>
+                                <li class="col-md-3"><a href="#NoiBat">Nổi bật</a></li>
+                            </ul>
+                            
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="footer_social d-flex flex-row align-items-center justify-content-lg-end justify-content-center">
+                            <ul>
+                                <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-skype" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="row text-center">
+                    <div class="col-lg-12">
+                        <div class="footer_nav_container">
+                            <div class="cr ">©2022 Được tạo ra <i class="fa fa-heart-o" aria-hidden="true"></i> bởi <a href="#">Thế giới điện tử</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+    <script src="~/Content/Assets/styles/bootstrap4/popper.js"></script>
+    <script src="~/Content/Assets/styles/bootstrap4/bootstrap.min.js"></script>
+    <script src="~/Content/Assets/plugins/Isotope/isotope.pkgd.min.js"></script>
+    <script src="~/Content/Assets/plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+    <script src="~/Content/Assets/plugins/easing/easing.js"></script>
+    <script src="~/Content/Assets/plugins/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+    <script src="~/Content/Assets/js/custom.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    @*<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>*@
+
+    <script src="~/Scripts/jsShoping.js"></script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

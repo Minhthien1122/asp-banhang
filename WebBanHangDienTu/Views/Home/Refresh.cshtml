@@ -1,0 +1,29 @@
+﻿@model WebBanHangDienTu.Models.ThongKeViewModel
+
+@if (Model!= null)
+{
+    <div class="thongke">
+        <table class="table">
+            <tr>
+                <td>Hôm nay</td>
+                <td>@Model.HomNay</td>
+            </tr>
+            <tr>
+                <td>Tuần này</td>
+                <td>@Model.TuanNay</td>
+            </tr>
+            <tr>
+                <td>Tháng này</td>
+                <td>@Model.ThangNay</td>
+            </tr>
+            <tr>
+                <td>Tất cả</td>
+                <td>@Model.TatCa</td>
+            </tr>
+            <tr>
+                <td>Người truy cập</td>
+                <td>@ViewBag.visitors_online</td>
+            </tr>
+        </table>
+    </div>
+}
